@@ -1,8 +1,6 @@
 import pygame
 import random
 
-pygame.init()
-
 BLACK = (0, 0, 0)
 GREY = (128, 128, 128)
 WHITE = (255, 255, 255)
@@ -15,11 +13,7 @@ GRID_HEIGHT = HEIGHT // TILE_SIZE
 
 FPS = 120
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-
-clock = pygame.time.Clock()
-
-def draw_grid(positions):
+def draw_grid(screen, positions):
     screen.fill(BLACK)
 
     for position in positions:
@@ -75,6 +69,11 @@ def get_neighbors(position):
     return neighbors
 
 def main_loop():
+    pygame.init()
+
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    clock = pygame.time.Clock()
+
     running = True
     playing = False
     count = 0
@@ -91,8 +90,6 @@ def main_loop():
         if count >= update_freq:
             count = 0
             positions = update_cells(positions)
-
-        pygame.display.set_caption('Playing' if playing else 'Paused')
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -124,7 +121,7 @@ def main_loop():
                     num_positions = random.randrange(6, 10) * GRID_WIDTH
                     positions = set([(random.randrange(0, GRID_HEIGHT), random.randrange(0, GRID_WIDTH)) for _ in range(num_positions)])
 
-        draw_grid(positions)
+        draw_grid(screen, positions)
 
         pygame.display.update()
 
