@@ -1,6 +1,4 @@
-import time
 import pygame
-import random
 
 BLACK = (0, 0, 0)
 GREY = (128, 128, 128)
