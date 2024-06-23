@@ -35,6 +35,7 @@ def draw_grid(positions):
 
 def main_loop():
     running = True
+    playing = False
 
     positions = set()
 
@@ -57,6 +58,14 @@ def main_loop():
                     positions.remove(position)
                 else:
                     positions.add(position)
+
+            if event.type == pygame.KEYDOWN:
+                if event.type == pygame.K_SPACE:
+                    playing = not playing
+
+                if event.key == pygame.K_c:
+                    positions = set()
+                    playing = False
 
         draw_grid(positions)
 
