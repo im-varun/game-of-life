@@ -53,10 +53,10 @@ def main_loop():
 
                 position = (column, row)
 
-                if not position in positions:
-                    positions.add(position)
-                else:
+                if position in positions:
                     positions.remove(position)
+                else:
+                    positions.add(position)
 
         draw_grid(positions)
 
