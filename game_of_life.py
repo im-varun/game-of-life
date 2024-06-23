@@ -1,3 +1,4 @@
+import time
 import pygame
 import random
 
@@ -6,12 +7,12 @@ GREY = (128, 128, 128)
 WHITE = (255, 255, 255)
 
 WIDTH, HEIGHT = 800, 800
-TILE_SIZE = 20
+TILE_SIZE = 10
 
 GRID_WIDTH = WIDTH // TILE_SIZE
 GRID_HEIGHT = HEIGHT // TILE_SIZE
 
-FPS = 120
+FPS = 60
 
 def draw_grid(screen, positions):
     screen.fill(BLACK)
@@ -77,7 +78,7 @@ def main_loop():
     running = True
     playing = False
     count = 0
-    update_freq = 60
+    update_freq = 10
 
     positions = set()
 
@@ -94,8 +95,16 @@ def main_loop():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    playing = not playing
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.key == pygame.K_c:
+                    positions = set()
+                    playing = False
+                    count = 0
+
+            if pygame.mouse.get_pressed()[0]:
                 x, y = pygame.mouse.get_pos()
 
                 column = x // TILE_SIZE
@@ -107,19 +116,6 @@ def main_loop():
                     positions.remove(position)
                 else:
                     positions.add(position)
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    playing = not playing
-
-                if event.key == pygame.K_c:
-                    positions = set()
-                    playing = False
-                    count = 0
-
-                if event.key == pygame.K_r:
-                    num_positions = random.randrange(6, 10) * GRID_WIDTH
-                    positions = set([(random.randrange(0, GRID_HEIGHT), random.randrange(0, GRID_WIDTH)) for _ in range(num_positions)])
 
         draw_grid(screen, positions)
 
