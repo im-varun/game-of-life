@@ -1,4 +1,5 @@
 import pygame
+import random
 
 pygame.init()
 
@@ -66,6 +67,10 @@ def main_loop():
                 if event.key == pygame.K_c:
                     positions = set()
                     playing = False
+
+                if event.key == pygame.K_r:
+                    num_positions = random.randrange(4, 10) * GRID_WIDTH
+                    positions = set([(random.randrange(0, GRID_HEIGHT), random.randrange(0, GRID_WIDTH)) for _ in range(num_positions)])
 
         draw_grid(positions)
 
