@@ -1,6 +1,9 @@
+import time
 import pygame
+import numpy as np
 
 BLACK = (0, 0, 0)
+LIGHT_BLACK = (40, 40, 40)
 GREY = (128, 128, 128)
 WHITE = (255, 255, 255)
 
@@ -10,110 +13,77 @@ TILE_SIZE = 10
 GRID_WIDTH = WIDTH // TILE_SIZE
 GRID_HEIGHT = HEIGHT // TILE_SIZE
 
-FPS = 60
-
-def draw_grid(screen, positions):
-    screen.fill(BLACK)
-
-    for position in positions:
-        column, row = position
-        top_left = (column * TILE_SIZE, row * TILE_SIZE)
-
-        pygame.draw.rect(screen, WHITE, (*top_left, TILE_SIZE, TILE_SIZE))
-
-def update_cells(positions):
-    all_neighbors = set()
-
-    new_positions = set()
-
-    for position in positions:
-        neighbors = get_neighbors(position)
-        all_neighbors.update(neighbors)
-
-        neighbors = list(filter(lambda x: x in positions, neighbors))
-
-        if len(neighbors) in [2, 3]:
-            new_positions.add(position)
-
-    for position in all_neighbors:
-        neighbors = get_neighbors(position)
-        neighbors = list(filter(lambda x: x in position, neighbors))
-
-        if len(neighbors) == 3:
-            new_positions.add(position)
-
-    return new_positions
-
-def get_neighbors(position):
-    x, y = position
-
-    neighbors = list()
-
-    for dx in [-1, 0, 1]:
-        for dy in [-1, 0, 1]:
-            if (dx == 0) or (dy == 0):
-                continue
-
-            nx, ny = x + dx, y + dy
-
-            if ((nx >= 0) and (nx < GRID_WIDTH)) and ((ny >= 0) and (ny < GRID_HEIGHT)):
-                neighbors.append((nx, ny))
-
-    return neighbors
-
-def main_loop():
+def gameoflife():
     pygame.init()
 
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    clock = pygame.time.Clock()
+    pygame.display.set_caption('Conway\'s Game of Life')
 
-    running = True
+    cells = np.zeros((GRID_WIDTH, GRID_HEIGHT))
+
+    screen.fill(LIGHT_BLACK)
+    
+    update_cells(screen, cells)
+
+    pygame.display.flip()
+    pygame.display.update()
+
     playing = False
-    count = 0
-    update_freq = 10
 
-    positions = set()
-
-    while running:
-        clock.tick(FPS)
-
-        if playing:
-            count += 1
-
-        if count >= update_freq:
-            count = 0
-            positions = update_cells(positions)
-
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                pygame.quit()
+                return
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     playing = not playing
-
-                if event.key == pygame.K_c:
-                    positions = set()
-                    playing = False
-                    count = 0
-
+                    update_cells(screen, cells)
+                    pygame.display.update()
+            
             if pygame.mouse.get_pressed()[0]:
                 x, y = pygame.mouse.get_pos()
 
                 column = x // TILE_SIZE
                 row = y // TILE_SIZE
 
-                position = (column, row)
+                cells[row, column] = 1
 
-                if position in positions:
-                    positions.remove(position)
-                else:
-                    positions.add(position)
+                update_cells(screen, cells)
+                pygame.display.update()
 
-        draw_grid(screen, positions)
+        screen.fill(LIGHT_BLACK)
 
-        pygame.display.update()
+        if playing:
+            cells = update_cells(screen, cells, playing=True)
+            pygame.display.update()
 
-    pygame.quit()
+        time.sleep(0.001)
+
+def update_cells(screen, current_generation, playing=False):
+    next_generation = np.zeros((current_generation.shape[0], current_generation.shape[1]))
+
+    for row, column in np.ndindex(current_generation.shape):
+        alive = np.sum(current_generation[row-1:row+2, column-1:column+2]) - current_generation[row, column]
+        color = BLACK if (current_generation[row, column] == 0) else WHITE
+
+        if current_generation[row, column] == 1:
+            if (alive < 2) or (alive > 3):
+                if playing:
+                    color = GREY
+            elif (2 <= alive <= 3):
+                next_generation[row, column] = 1
+                if playing:
+                    color = WHITE
+        else:
+            if (alive == 3):
+                next_generation[row, column] = 1
+                if playing:
+                    color = WHITE
+
+        pygame.draw.rect(screen, color, (column * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE))
+
+    return next_generation
 
 if __name__ == "__main__":
-    main_loop()
+    gameoflife()
