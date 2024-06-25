@@ -42,13 +42,14 @@ def gameoflife():
             if pygame.mouse.get_pressed()[0]:
                 x, y = pygame.mouse.get_pos()
 
-                column = x // TILE_SIZE
-                row = y // TILE_SIZE
+                if (0 <= x < WIDTH) and (0 <= y < HEIGHT):
+                    column = x // TILE_SIZE
+                    row = y // TILE_SIZE
 
-                cells[row, column] = 1
+                    cells[row, column] = 1
 
-                update_cells(screen, cells)
-                pygame.display.update()
+                    update_cells(screen, cells)
+                    pygame.display.update()
 
         screen.fill(BLACK)
 
