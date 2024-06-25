@@ -3,8 +3,6 @@ import pygame
 import numpy as np
 
 BLACK = (0, 0, 0)
-LIGHT_BLACK = (40, 40, 40)
-GREY = (128, 128, 128)
 WHITE = (255, 255, 255)
 
 WIDTH, HEIGHT = 800, 800
@@ -21,7 +19,7 @@ def gameoflife():
 
     cells = np.zeros((GRID_WIDTH, GRID_HEIGHT))
 
-    screen.fill(LIGHT_BLACK)
+    screen.fill(BLACK)
     
     update_cells(screen, cells)
 
@@ -52,7 +50,7 @@ def gameoflife():
                 update_cells(screen, cells)
                 pygame.display.update()
 
-        screen.fill(LIGHT_BLACK)
+        screen.fill(BLACK)
 
         if playing:
             cells = update_cells(screen, cells, playing=True)
@@ -68,10 +66,7 @@ def update_cells(screen, current_generation, playing=False):
         color = BLACK if (current_generation[row, column] == 0) else WHITE
 
         if current_generation[row, column] == 1:
-            if (alive < 2) or (alive > 3):
-                if playing:
-                    color = GREY
-            elif (2 <= alive <= 3):
+            if (2 <= alive <= 3):
                 next_generation[row, column] = 1
                 if playing:
                     color = WHITE
