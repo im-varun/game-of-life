@@ -41,6 +41,12 @@ def gameoflife():
 
                     update_cells(screen, cells)
                     pygame.display.update()
+
+                if event.key == pygame.K_r:
+                    cells = np.random.choice([0, 1], (GRID_WIDTH, GRID_HEIGHT), p=[0.9, 0.1])
+
+                    update_cells(screen, cells)
+                    pygame.display.update()
             
             if pygame.mouse.get_pressed()[0]:
                 x, y = pygame.mouse.get_pos()
