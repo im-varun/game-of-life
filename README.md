@@ -1,8 +1,18 @@
 # Conway's Game of Life
 
-This project is a simple 2D implementation of Conway's Game of Life in Python, using the [pygame](https://www.pygame.org/news) module.
+This project is a simple 2D implementation of Conway's Game of Life in Python, using the [pygame](https://www.pygame.org/news) module.  
+
+The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves.  
+
+**Rules**
+1. Any live cell with fewer than two live neighbours dies, as if by underpopulation.  
+2. Any live cell with two or three live neighbours lives on to the next generation.  
+3. Any live cell with more than three live neighbours dies, as if by overpopulation.  
+4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.  
 
 # Installation
+
+Prerequisite: Python 3.10+
 
 To install and run Conway's Game of Life, follow these steps:
 
@@ -21,6 +31,16 @@ cd game-of-life
 pip install -r requirements.txt
 ```
 
+4. Run the Game of Life simulation:
+```sh
+python game_of_life.py
+```
+
 # Usage
 
-To be updated soon.
+The Game of Life simulation uses the following controls:
+1. Toggle cell state: `Left Mouse Button`
+2. Start/Stop the simulation: `Spacebar`
+3. Generate random cells on the grid: `r`
+4. Clear the cells on the grid: `c`
+5. Quit: `Esc` (alternatively, use the X button on the screen)
