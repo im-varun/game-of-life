@@ -60,22 +60,16 @@ def gameoflife():
                 if event.key == pygame.K_SPACE:
                     playing = not playing
 
-                    update_cells(screen, cells)
-                    pygame.display.update()
-
                 # if the user pressed r key, generate a grid of cells with random states (alive or dead)
                 if event.key == pygame.K_r:
                     cells = np.random.choice([0, 1], (GRID_WIDTH, GRID_HEIGHT), p=[0.9, 0.1])
-
-                    update_cells(screen, cells)
-                    pygame.display.update()
 
                 # if the user pressed c key, clear the current grid of cells on the screen
                 if event.key == pygame.K_c:
                     cells = np.zeros((GRID_WIDTH, GRID_HEIGHT))
 
-                    update_cells(screen, cells)
-                    pygame.display.update()
+                update_cells(screen, cells)
+                pygame.display.update()
             
             # if the user pressed left mouse on the screen, toggle cell state at that mouse location
             if pygame.mouse.get_pressed()[0]:
