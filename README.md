@@ -2,7 +2,9 @@
 
 This project is a simple 2D implementation of Conway's Game of Life in Python, using the [pygame](https://www.pygame.org/news) module.  
 
-The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves.  
+# About Game of Life
+
+The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves.  
 
 **Rules**
 1. Any live cell with fewer than two live neighbours dies, as if by underpopulation.  
