@@ -46,3 +46,7 @@ The Game of Life simulation uses the following controls:
 3. Generate random cells on the grid: `r`
 4. Clear the cells on the grid: `c`
 5. Quit: `Esc` (alternatively, use the X button on the screen)
+
+# Demo
+
+[Game of Life Demo](https://drive.google.com/file/d/1lrzkJhhzoWIpc4yJLre5lUxwpApZLALX/view?usp=sharing)
