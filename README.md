@@ -14,7 +14,7 @@ The Game of Life is a cellular automaton devised by the British mathematician Jo
 
 # Installation
 
-Prerequisite: Python 3.10+
+Prerequisite: A latest version of [Python](https://www.python.org/)
 
 To install and run Conway's Game of Life, follow these steps:
 
