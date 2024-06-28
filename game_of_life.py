@@ -79,7 +79,10 @@ def gameoflife():
                     column = x // CELL_SIZE
                     row = y // CELL_SIZE
 
-                    cells[row, column] = 1
+                    if cells[row, column] == 0:
+                        cells[row, column] = 1
+                    else:
+                        cells[row, column] = 0
 
                     update_cells(screen, cells)
                     pygame.display.flip()
