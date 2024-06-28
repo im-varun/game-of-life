@@ -1,6 +1,6 @@
 # Conway's Game of Life
 
-This project is a simple 2D implementation of Conway's Game of Life in Python, using the [pygame](https://www.pygame.org/news) module.  
+This project is a simple 2D implementation of Conway's Game of Life in Python, using [pygame](https://www.pygame.org/news) and [numpy](https://numpy.org/) modules.  
 
 # About Game of Life
 
