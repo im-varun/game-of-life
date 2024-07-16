@@ -16,7 +16,7 @@ The Game of Life is a cellular automaton devised by the British mathematician Jo
 
 [Game of Life Demo](https://drive.google.com/file/d/1lrzkJhhzoWIpc4yJLre5lUxwpApZLALX/view?usp=sharing)
 
-# Installation
+# Installation Instructions
 
 Prerequisite: A latest version of [Python](https://www.python.org/)
 
@@ -42,7 +42,7 @@ pip install -r requirements.txt
 python game_of_life.py
 ```
 
-# Usage
+# Usage Instructions
 
 The Game of Life simulation uses the following controls:
 1. Toggle cell state: `Left Mouse Button`
