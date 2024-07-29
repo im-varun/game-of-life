@@ -105,6 +105,8 @@ def update_cells(screen, current_generation, playing=False):
     :param screen: Pygame screen on which cells are drawn.
     :param current_generation: Numpy array containing cells states for current generation.
     :param playing: Boolean variable to indicate if game is in progress or is paused by the user (default=False).
+
+    :return: Numpy array of cell states for next generation
     '''
 
     # numpy array of (GRID_WIDTH, GRID_HEIGHT) shape to store cell states for next generation
